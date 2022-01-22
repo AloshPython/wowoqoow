@@ -4,7 +4,6 @@ import telebot
 from telebot import types
 from user_agent import generate_user_agent
 import logging
-from InstagramIG import * 
 from config import *
 from flask import Flask, request
 
@@ -23,7 +22,7 @@ def A(message):
     B = types.InlineKeyboardButton(text = "دخول البوت",callback_data = "A")
     A.add(B)
     bot.send_message(message.chat.id, text = """
-*➖ 👋اهلا عزيزي*  [{}](tg://settings/)       
+*➖ 👋اهلا .عزيزي*  [{}](tg://settings/)       
 *➖ أيدك :* [{}](tg://settings/)            
 *➖ يوزرك ان وجد :* @{}
 *➖ قناه المبرمج :* ["𝙰𝙻𝙾𝚂𝙷"𝙿𝚈𝚃𝙷𝙾𝙽"](https://t.me/DtDtDt)
@@ -47,9 +46,7 @@ def ali(message):
         following =req['graphql']['user']['edge_follow']['count']
         id=req['graphql']['user']['id']
         name=req['graphql']['user']['full_name']
-        followes = req['graphql']['user']['edge_followed_by']['count']
-        data1 = {}
-        data = SidraELEzz.data(str(User))	             
+        followes = req['graphql']['user']['edge_followed_by']['count']             
         bot.send_message(message.chat.id, f"""
 *✅ ᯓ تم سحب معلومات الحساب بنجاح*
 *⌯ ⌯ ⌯ ⌯ ⌯ ⌯ ⌯ ⌯ ⌯ ⌯ ⌯ ⌯ ⌯ ⌯ ⌯* 
@@ -58,7 +55,6 @@ def ali(message):
 *ᯓ 𝙵𝙾𝙻𝙻𝙾𝚆𝙴𝚂 :* {followes}
 *ᯓ 𝙵𝙾𝙻𝙻𝙾𝙸𝙽𝙶 :* {following}
 *ᯓ 𝙸𝙳 :* {id}
-*ᯓ 𝙳𝙰𝚃𝙴 :* {data}
 *ᯓ ʟɪɴᴋ :* [Link](https://instagram.com/{message.text})
 *⌯ ⌯ ⌯ ⌯ ⌯ ⌯ ⌯ ⌯ ⌯ ⌯ ⌯ ⌯ ⌯ ⌯ ⌯*
 *Dv :* ["𝙰𝙻𝙾𝚂𝙷"𝙿𝚈𝚃𝙷𝙾𝙽"](https://t.me/DtDtDt)
