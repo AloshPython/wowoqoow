@@ -1,83 +1,44 @@
+import requests,json,flask,secrets,re
+from flask import jsonify
+from flask import *
 
-import requests,user_agent,json,flask,telebot,random,os,sys
-import telebot
-from telebot import types
-from user_agent import generate_user_agent
-import logging
-from config import *
-from flask import Flask, request
+app = Flask(__name__)
+@app.route("/")
 
-bot = telebot.TeleBot(BOT_TOKEN)
-server = Flask(__name__)
-logger = telebot.logger
-logger.setLevel(logging.DEBUG)
+def index():
+    return "<h1>Api Alosh : @aaalaaa </h1>"
 
-
-@bot.message_handler(commands=["start"])
-def A(message):
-    Id =message.chat.id
-    Name = message.chat.first_name
-    User = message.from_user.username
-    A = types.InlineKeyboardMarkup(row_width = 1)
-    B = types.InlineKeyboardButton(text = "دخول البوت",callback_data = "A")
-    A.add(B)
-    bot.send_message(message.chat.id, text = """
-*➖ 👋اهلا عزيزي*  [{}](tg://settings/)       
-*➖ أيدك :* [{}](tg://settings/)            
-*➖ يوزرك ان وجد :* @{}
-*➖ قناه المبرمج :* ["𝙰𝙻𝙾𝚂𝙷"𝙿𝚈𝚃𝙷𝙾𝙽"](https://t.me/DtDtDt)
-*➖ المبرمج :* [Alosh](https://t.me/aaalaaa)""".format(Name,Id,User),parse_mode="markdown",disable_web_page_preview=True,reply_markup=A)
-@bot.callback_query_handler(func=lambda call: True)
-def Hhh(call):
-    if call.data == "A":
-        A1(call.message)
-def A1(message):
-    bot.edit_message_text(chat_id=message.chat.id,message_id=message.message_id,text="*✅ send User*",parse_mode='markdown')
-@bot.message_handler(content_types=['text'])
-def code(message):
-     ali(message)
-def ali(message):
-    try:                
-        msg  = message.text 
-        url =(f"https://www.instagram.com/{msg}/?__a=1")
-        head = {'user-agent': 'Mozilla/5.0 (Windows NT 6.2; en-US; rv:1.9.0.20) Gecko/20170715 Firefox/37.0',
-  'Cookie':'91a6c65102046ea491a6c65102046ea4'}
-        req =requests.get(url, headers=head).json()  
-        following =req['graphql']['user']['edge_follow']['count']
-        id=req['graphql']['user']['id']
-        name=req['graphql']['user']['full_name']
-        followes = req['graphql']['user']['edge_followed_by']['count']
-        alsh = requests.get(f"https://o7aa.pythonanywhere.com/?id={id}")
-        alsh1 = alsh.json()            
-        data = alsh1['data']		            	             
-        bot.send_message(message.chat.id, f"""
-*✅ ᯓ تم سحب معلومات الحساب بنجاح*
-*⌯ ⌯ ⌯ ⌯ ⌯ ⌯ ⌯ ⌯ ⌯ ⌯ ⌯ ⌯ ⌯ ⌯ ⌯* 
-*ᯓ name :* {name}
-*ᯓ 𝚄𝚂𝙴𝚁 :* {message.text}           
-*ᯓ 𝙵𝙾𝙻𝙻𝙾𝚆𝙴𝚂 :* {followes}
-*ᯓ 𝙵𝙾𝙻𝙻𝙾𝙸𝙽𝙶 :* {following}
-*ᯓ 𝙸𝙳 :* {id}
-*ᯓ 𝙳𝙰𝚃𝙴 :* {data}
-*ᯓ ʟɪɴᴋ :* [Link](https://instagram.com/{message.text})
-*⌯ ⌯ ⌯ ⌯ ⌯ ⌯ ⌯ ⌯ ⌯ ⌯ ⌯ ⌯ ⌯ ⌯ ⌯*
-*Dv :* ["𝙰𝙻𝙾𝚂𝙷"𝙿𝚈𝚃𝙷𝙾𝙽"](https://t.me/DtDtDt)
-*By :* [Alosh](https://t.me/aaalaaa)   
-                          """, parse_mode="markdown",disable_web_page_preview="true")
-    except:
-                 
-         bot.send_message(message.chat.id, text=f"*Erorr User ! *",parse_mode="markdown")            
-bot.polling()
-		
-
-@server.route(f"/{BOT_TOKEN}", methods=["POST"])
-def redirect_message():
-    json_string = request.get_data().decode("utf-8")
-    update = telebot.types.Update.de_json(json_string)
-    bot.process_new_updates([update])
-    return "!", 200
-
-if __name__ == "__main__":
-    bot.remove_webhook()
-    bot.set_webhook(url="https://alitools.herokuapp.com/"+str(BOT_TOKEN))
-    server.run(host="0.0.0.0", port=int(os.environ.get("PORT", 5000)))
+@app.route('/User/instagram/Alosh/Tools/',methods=['GET'])
+def Hhjjj():
+    User = request.args.get("User")
+    headers ={'accept': '*/*',
+'accept-encoding': 'gzip, deflate, br',
+'accept-language': 'en-US,en;q=0.9',
+'content-length': '1176',
+'content-type': 'application/x-www-form-urlencoded',
+'cookie': 'ig_cb=2; ig_did=BB52B198-B05A-424E-BA07-B15F3D4C3893; mid=YAlcaQALAAHzmX6nvD8dWMRVYFCO; shbid=15012; rur=PRN; shbts=1612894029.7666144; csrftoken=CPKow8myeXW9AuB3Lny0wNxx0EzoDQoI',
+'origin': 'https://www.instagram.com',
+'referer':'https://www.instagram.com/',
+'sec-ch-ua': '"Google Chrome";v="87", " Not;A Brand";v="99", "Chromium";v="87"',
+'sec-ch-ua-mobile': '?0',
+'sec-ch-ua-platform': "Windows",
+'sec-fetch-dest': 'empty',
+'sec-fetch-mode': 'cors',
+'sec-fetch-site': 'same-site',
+'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/94.0.4606.81 Safari/537.36',
+'x-asbd-id':'198387' ,
+'x-csrftoken': 'CPKow8myeXW9AuB3Lny0wNxx0EzoDQoI',
+'x-ig-www-claim': 'hmac.AR0Plwj5om112fwzrrYnMNjMLPnyWfFFq1tG7MCcMv5_vN9M',
+'x-instagram-ajax': '72bda6b1d047',
+'x-requested-with': 'XMLHttpRequest'} 
+    url= "https://www.instagram.com/accounts/web_create_ajax/attempt/"
+    data= {'email' : 'a@gmail.com',
+'username': (f'{User}'),
+'first_name': 'AA',
+'opt_into_one_tap': 'false'}
+    req = requests.post(url,headers=headers,data=data). text
+    Uss =  ('{"account_created": false, "errors": {"email": [{"message": "Too many accounts are using a@gmail.com.", "code": "email_sharing_limit"}], "__all__": [{"message": "Create a password at least 6 characters long.", "code": "too_short_password"}]}, "dryrun_passed": false, "username_suggestions": [], "status": "ok", "error_type": "form_validation_error"}') 
+    if Uss in req:
+         return jsonify(User=True,By_Telegram="@aaalaaa")
+    else:
+        return jsonify(User=False,By_Telegram="@aaalaaa")    
